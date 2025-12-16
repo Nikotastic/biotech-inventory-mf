@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "realInventoryMF", // Changed name to avoid conflict
+      name: "inventoryMF",
       filename: "remoteEntry.js",
       exposes: {
         "./InventoryDashboard":
