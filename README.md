@@ -1,178 +1,89 @@
-# 📦 BioTech Inventory - Gestión de Inventario
+# 📦 BioTech Inventory Microfrontend
 
-Módulo de control de stock de alimentos, medicamentos e insumos.
+<div align="center">
 
-## 🚀 Características
+  <img src="https://biotech-shell.vercel.app/BioTech.webp" alt="BioTech Logo" width="200" />
+  
+  ![Inventory Banner](https://capsule-render.vercel.app/api?type=waving&color=d97706&height=120&section=header&text=Inventory&fontSize=70&animation=fadeIn&fontAlignY=40)
 
-- **Control de stock**: Inventario en tiempo real
-- **Movimientos**: Entradas y salidas
-- **Alertas de stock**: Mínimos y críticos
-- **Valorización**: Costeo de inventario
-- **Reportes**: Análisis de consumo
-- **Proveedores**: Gestión de suppliers
-- **Órdenes de compra**: Solicitudes automáticas
+  <br />
 
-## 🛠️ Tecnologías
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-- React 18
-- Vite + Module Federation
-- React Hook Form + Yup
-- Axios
-- Zustand
-- Tailwind CSS
+  <br />
 
-## 📦 Instalación
+  <a href="https://biotech-shell.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀_Live_App-Access_Platform-d97706?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+  <a href="https://github.com/Nikotastic/BioTech-Backend">
+    <img src="https://img.shields.io/badge/🔗_Backend_Repo-View_Code-22c55e?style=for-the-badge&logo=github&logoColor=white" alt="Backend Repo" />
+  </a>
 
-```bash
-npm install
-npm run dev  # Puerto 5006
-```
+</div>
 
-## 🔌 Componentes Expuestos
+<br />
 
-```javascript
-// Dashboard de inventario
-import('inventoryMF/InventoryDashboard')
+## 📋 Overview
 
-// Gestión de stock
-import('inventoryMF/StockManagement')
+The **Inventory Microfrontend** safeguards farm assets. Accessible via the [Shell Application](https://biotech-shell.vercel.app/), it provides real-time tracking of stock, equipment, and consumables.
 
-// Movimientos
-import('inventoryMF/StockMovements')
+---
 
-// Store
-import('inventoryMF/InventoryStore')
-```
+## ✨ Features
 
-## 📁 Estructura
+- **📦 Stock Levels**: Live tracking of current inventory.
+- **⚠️ Low Stock Alerts**: Automatic warnings when supplies run low.
+- **🚜 Equipment**: Management of farm machinery and maintenance schedules.
+- **📝 Usage History**: Log where and when resources are consumed.
 
-```
-src/
-├── features/
-│   ├── inventory-dashboard/
-│   │   ├── components/
-│   │   │   └── InventoryDashboard.jsx
-│   │   ├── hooks/
-│   │   └── services/
-│   ├── stock-management/
-│   │   ├── components/
-│   │   ├── validations/
-│   │   └── services/
-│   └── stock-movements/
-│       ├── components/
-│       └── services/
-├── shared/
-│   ├── store/
-│   │   └── inventoryStore.js
-│   ├── constants/
-│   │   └── inventoryConstants.js
-│   └── utils/
-└── App.jsx
-```
+---
 
-## 📦 Categorías de Productos
+## 🛠️ Tech Stack
 
-```javascript
-export const PRODUCT_CATEGORIES = {
-  FEED: 'Alimento',
-  MEDICINE: 'Medicamento',
-  SUPPLEMENT: 'Suplemento',
-  EQUIPMENT: 'Equipo',
-  SUPPLY: 'Insumo'
-}
-```
+- **Framework**: React 19
+- **Build Tool**: Vite
+- **Styling**: TailwindCSS
+- **State**: Zustand
 
-## 📊 Estados de Stock
+---
 
-```javascript
-export const STOCK_STATUS = {
-  AVAILABLE: 'Disponible',
-  LOW: 'Bajo',
-  CRITICAL: 'Crítico',
-  OUT_OF_STOCK: 'Agotado'
-}
-```
+## 🚀 Getting Started
 
-## 🌍 API Endpoints
+1.  **Clone & Install**
 
-```javascript
-GET    /api/inventory/products        // Productos
-POST   /api/inventory/products        // Nuevo producto
-PUT    /api/inventory/products/:id    // Actualizar
-GET    /api/inventory/movements       // Movimientos
-POST   /api/inventory/movements       // Registrar movimiento
-GET    /api/inventory/alerts          // Alertas de stock
-GET    /api/inventory/stats           // Estadísticas
-```
+    ```bash
+    git clone https://github.com/Nikotastic/biotech-inventory-mf.git
+    npm install
+    ```
 
-## 📦 Producto
+2.  **Run Locally**
+    ```bash
+    npm run dev
+    ```
+    Running on: `http://localhost:5007`
 
-```typescript
-interface Product {
-  id: number
-  name: string
-  category: string
-  code: string
-  description: string
-  quantity: number
-  unit: string
-  minStock: number
-  maxStock: number
-  price: number
-  supplier: string
-  lastPurchase: Date
-  location: string
-  status: string
-}
-```
+---
 
-## 📝 Movimiento de Stock
+## 🤝 Contributing & Credits
 
-```typescript
-interface StockMovement {
-  id: number
-  productId: number
-  type: 'Entrada' | 'Salida' | 'Ajuste' | 'Transferencia'
-  quantity: number
-  date: Date
-  reason: string
-  reference: string
-  user: string
-  notes?: string
-}
-```
+<div align="center">
 
-## 🔔 Alertas de Stock
+**Core Architecture & Development**<br>
+Built with ❤️ by [**@Nikotastic**](https://github.com/Nikotastic)
 
-```javascript
-// Niveles de alerta
-- Stock bajo: cantidad < minStock
-- Stock crítico: cantidad < (minStock * 0.5)
-- Stock agotado: cantidad = 0
+  <br>
 
-// Notificaciones
-- Email a compras
-- Notificación en dashboard
-- Sugerencia de orden de compra
-```
+**UX/UI Design & Creative Direction**<br>
+Special thanks to [**@J2rkan**](https://github.com/J2rkan) for the premium design contributions.
 
-## 📊 Reportes
+</div>
 
-- Valorización de inventario
-- Rotación de productos
-- Consumo por período
-- Productos sin movimiento
-- Análisis ABC
+<br>
 
-## 🚀 Deploy
+---
 
-```bash
-npm run build
-vercel --prod
-```
-
-## 📞 Contacto
-
-- Email: inventory@biotech.com
-- Docs: https://docs.biotech.com/inventory
-```
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=d97706&height=100&section=footer" width="100%" />
+</div>
