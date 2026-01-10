@@ -40,5 +40,6 @@ export default defineConfig({
     target: "esnext",
     minify: false,
     cssCodeSplit: false,
+    modulePreload: false,
   },
 });
