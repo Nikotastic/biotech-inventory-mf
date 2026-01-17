@@ -35,3 +35,5 @@ export function InventoryList({ onCreate, onEdit }) {
     </div>
   );
 }
+
+export default InventoryList;
