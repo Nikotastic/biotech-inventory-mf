@@ -1,11 +1,18 @@
-import { Package, TrendingDown, AlertTriangle, Search } from "lucide-react";
+import {
+  Package,
+  TrendingDown,
+  AlertTriangle,
+  Search,
+  Trash2,
+  Edit2,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import {
   PRODUCT_CATEGORIES,
   STOCK_STATUS,
 } from "@/shared/constants/inventoryConstants";
 
-export function InventoryTable({ products, onEdit }) {
+export function InventoryTable({ products, onEdit, onDelete }) {
   const getStatusColor = (status) => {
     switch (status) {
       case "Óptimo":
@@ -84,7 +91,7 @@ export function InventoryTable({ products, onEdit }) {
               <th className="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                 Estado
               </th>
-              <th className="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="text-right py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                 Acciones
               </th>
             </tr>
@@ -147,13 +154,23 @@ export function InventoryTable({ products, onEdit }) {
                     {product.status}
                   </div>
                 </td>
-                <td className="py-4 px-6">
-                  <button
-                    onClick={() => onEdit(product.id)}
-                    className="whitespace-nowrap px-3 py-1.5 bg-white border border-gray-200 hover:border-green-500 hover:text-green-600 text-gray-600 rounded-lg transition-all text-xs font-semibold shadow-sm cursor-pointer"
-                  >
-                    Editar
-                  </button>
+                <td className="py-4 px-6 text-right">
+                  <div className="flex items-center justify-end gap-2">
+                    <button
+                      onClick={() => onEdit(product.id)}
+                      className="p-2 bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 text-gray-600 rounded-lg transition-all shadow-sm cursor-pointer"
+                      title="Editar"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => onDelete(product.id)}
+                      className="p-2 bg-white border border-gray-200 hover:border-red-500 hover:text-red-600 text-gray-600 rounded-lg transition-all shadow-sm cursor-pointer"
+                      title="Eliminar"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </td>
               </motion.tr>
             ))}

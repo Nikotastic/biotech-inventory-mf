@@ -7,6 +7,7 @@ export function useInventory() {
   const [filterCategory, setFilterCategory] = useState("all");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [operationLoading, setOperationLoading] = useState(false);
 
   useEffect(() => {
     loadProducts();
@@ -21,6 +22,53 @@ export function useInventory() {
       console.error("Failed to load inventory:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const addProduct = async (productData) => {
+    try {
+      setOperationLoading(true);
+      const newProduct = await inventoryService.createProduct(productData);
+      setProducts((prev) => [newProduct, ...prev]);
+      return true;
+    } catch (error) {
+      console.error("Failed to create product:", error);
+      return false;
+    } finally {
+      setOperationLoading(false);
+    }
+  };
+
+  const updateProduct = async (id, productData) => {
+    try {
+      setOperationLoading(true);
+      const updatedProduct = await inventoryService.updateProduct(
+        id,
+        productData,
+      );
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? updatedProduct : p)),
+      );
+      return true;
+    } catch (error) {
+      console.error("Failed to update product:", error);
+      return false;
+    } finally {
+      setOperationLoading(false);
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      setOperationLoading(true);
+      await inventoryService.deleteProduct(id);
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+      return true;
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+      return false;
+    } finally {
+      setOperationLoading(false);
     }
   };
 
@@ -51,6 +99,7 @@ export function useInventory() {
 
   return {
     loading,
+    operationLoading,
     products,
     filteredProducts,
     stats,
@@ -62,6 +111,9 @@ export function useInventory() {
     },
     actions: {
       reload: loadProducts,
+      addProduct,
+      updateProduct,
+      deleteProduct,
     },
   };
 }
